@@ -25,10 +25,10 @@ description: >-                        # used by seo meta and the atom feed
   and focuses on text presentation.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: ''
+url: 'http://www.dcptoday.xyz'
 
 github:
-  username: github_username             # change to your github username
+  username: calm-peng             # change to your github username
 
 twitter:
   username: twitter_username            # change to your twitter username
@@ -36,7 +36,7 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
+  name: calm-peng
   email: example@doamin.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
@@ -74,7 +74,7 @@ theme_mode:   # [light|dark]
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn: ''
+img_cdn: 'http://cdn.dcptoday.xyz.'
 
 # the avatar on sidebar, support local or CORS resources
 avatar: https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/commons/avatar.jpg
