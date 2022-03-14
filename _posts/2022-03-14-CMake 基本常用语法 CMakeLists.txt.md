@@ -1,8 +1,8 @@
 ---
 title: CMake基本常用语法CMakeLists.txt
 date: 2022-03-14 17:57
-categories: [语言, C\C++]
-tags: [C/C++]     # TAG names should always be lowercase
+categories: [工具, CMake]
+tags: [CMake]     # TAG names should always be lowercase
 ---
 
 ## Hello, World
