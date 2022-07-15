@@ -25,7 +25,7 @@ description: >-                        # used by seo meta and the atom feed
   and focuses on text presentation.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'http://www.dcptoday.xyz'
+url: 'http://calm-peng.github.io'
 
 github:
   username: calm-peng             # change to your github username
@@ -74,7 +74,7 @@ theme_mode: light  # [light|dark]
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn: 'http://cdn.dcptoday.xyz.'
+img_cdn: ''
 
 # the avatar on sidebar, support local or CORS resources
 avatar: https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/commons/avatar.jpg
