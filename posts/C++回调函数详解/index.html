@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="zh-CN" mode="light" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="generator" content="Jekyll v4.3.2" /><meta property="og:title" content="C++回调函数" /><meta property="og:locale" content="zh_CN" /><meta name="description" content="C++回调函数" /><meta property="og:description" content="C++回调函数" /><link rel="canonical" href="http://calm-peng.github.io/posts/C++%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/" /><meta property="og:url" content="http://calm-peng.github.io/posts/C++%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/" /><meta property="og:site_name" content="Calm’s blog" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2022-06-30T15:38:00+08:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="C++回调函数" /><meta name="twitter:site" content="@twitter_username" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-04-16T20:33:16+08:00","datePublished":"2022-06-30T15:38:00+08:00","description":"C++回调函数","headline":"C++回调函数","mainEntityOfPage":{"@type":"WebPage","@id":"http://calm-peng.github.io/posts/C++%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/"},"url":"http://calm-peng.github.io/posts/C++%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/"}</script><title>C++回调函数 | Calm's blog</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="Calm's blog"><meta name="application-name" content="Calm's blog"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/commons/avatar.jpg" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">Calm's blog</a></div><div class="site-subtitle font-italic">Discipline,Calm,Practice</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/calm-peng" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://twitter.com/twitter_username" aria-label="twitter" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['pzh2217','163.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" > <i class="fas fa-rss"></i> </a></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>C++回调函数</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>C++回调函数</h1><div class="post-meta text-muted d-flex flex-column"><div> <span class="semi-bold"> calm-peng </span> <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Thu, Jun 30, 2022, 3:38 PM +0800" prep="on" > Jun 30, 2022 <i class="unloaded">2022-06-30T15:38:00+08:00</i> </span></div><div> <span> <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Sun, Apr 16, 2023, 8:33 PM +0800" prefix="Updated " > Apr 16 <i class="unloaded">2023-04-16T20:33:16+08:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2760 words">15 min</span></div></div><div class="post-content"><h1 id="c回调函数">C++回调函数</h1><h3 id="1什么是回调函数">1、什么是回调函数</h3><p>回调函数本质上也是普通函数，只是调用机制有所区别——首先通过传参的形式将该函数的地址传递给其他函数，然后在其他函数中通过函数指针调用该函数。在其他函数中通过函数指针调用该函数的过程称为回调，而作为被调用的该函数则被称为回调函数。有人可能会疑惑何必多此一举，直接在其他函数中调用该函数就好，为何一定要通过指针中转。</p><h3 id="2为什么需要回调函数">2、为什么需要回调函数</h3><p>这就不得不提到项目联合开发带来的必然后果——接口的兼容性问题。举个超级简单的例子：程序员小A和程序员小B联合开发一个项目，要求小A开发的函数必须为小B开发的函数提供灵活可用的接口。 假如小A小B是好朋友，他们天天在一起，而且也不考虑开发效率问题，那就串行方式一起开发好了。如下例所示，在同一个文件中，小A先负责开发Add()函数，小B后负责开发add()函数，小A需要调用小B的函数，即小A为小B提供了一个接口，通过这个接口小B可以随意通过更改add()函数，间接更改了Add()函数。 由于小A在使用小B的函数前小B还没有实现，所以他们需要先一起商量一下小B需要实现的函数名称、函数返回值、参数类型，然后小A在调用前先声明。小A在完成自己的工作后就可以休息了，然后小B就按照之前商量好的定义函数，对于函数体中具体怎么写完全由小B自由发挥了：</p><div lang="c++" class="language-c++ highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre><td class="rouge-code"><pre><span class="cm">/*test.h*/</span>
+<span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">Add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/*main.cpp*/</span>
+<span class="cp">#include</span><span class="cpf">"test.h"</span><span class="cp">
+</span><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+
+</pre></table></code></div></div><p>延续上文的故事，但现在场景变了。为了提高效率需要小A和小B并行操作，但工作类容没有变。显然他们需要在两个文件中完成各自的任务。小A同样需要声明小B的函数。对于现实中的项目开发而言，这种方式最为常见。</p><pre><code class="language-C++">/*test.h*/
+#pragma once
+#include&lt;iostream&gt;
+using namespace std;
+int add(int, int);
+void Add(int a, int b)
+{
+	cout &lt;&lt; add(a, b) &lt;&lt; endl;
+}
+/*test.cpp*/
+#include"test.h"
+int add(int a, int b)
+{
+	return a + b;
+}
+void main()
+{
+	Add(1, 2);
+}
+
+</code></pre><p>看到这里你肯定回想，这也太简单了，完全没有啰嗦的必要，其实我只是想一步步引出为什么要有回调函数的存在。通过上面的例子我们不难发现，小A为小B提供了接口，使得小B定义的函数能够在合适的时机被调用，这里必须有一个前提是小A和小B要提前商量好小B所需实现的函数的名称、返回值、参数列表。 而现在我们延续上面的故事，但场景又变了，小A和小B完全不认识，甚至小A不知道小B要用自己的接口，那么再按照上面的思路无论对小A还是小B来说都不那么友好了。首先对于小A来说，每次调用小B定义的函数前都需要声明，很是麻烦。而对于小B来说，由于小A定义的函数函数体对于小B来说是封装看不见的，小B对于自己定义的函数如何传到小A定义的函数中去很不直观，而且小B定义的函数名称、返回值类型、参数列表必须与小A在之前做出的声明保持完全一致。 因而，回调函数闪亮登场。如下例所示，小A不再需要每次调用小B定义的函数之前都要进行声明，小A只需要提供一个函数指针来接收小B传过来的函数的地址，而不用管函数名是什么。小A用这个指针就可以直接调用小B定义的函数。小B可以自己起函数名，只是返回类型和参数列表必须和小A的声明保持一致。</p><div lang="c++" class="language-c++ highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="cm">/*test.h*/</span>
+<span class="cp">#pragma once
+#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">Add</span><span class="p">(</span><span class="kt">int</span><span class="p">(</span><span class="o">*</span><span class="n">callbackfun</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">),</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">callbackfun</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/*test.cpp*/</span>
+<span class="cp">#include</span><span class="cpf">"test.h"</span><span class="cp">
+</span><span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">Add</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+
+</pre></table></code></div></div><p>上面例子可以看出，回调函数必须通过函数指针进行传递和调用，为了简化代码，一般会将函数指针起个别名，格式为： ${typedef 返回值类型 (<em>指针名) (参数列表)}$ 则上面的例子部分代码可以修改如下。无论是pf(a,b)还是(</em>pf)(a,b)都是可以的，我打印了pf和*pf，发现它们都表示的是同一函数的地址。</p><pre><code class="language-C++">typedef int(*callbackfun)(int, int);
+void Add(callbackfun pf, int a, int b)
+{
+	cout&lt;&lt;pf&lt;&lt;endl;
+	cout&lt;&lt;*pf&lt;&lt;endl;
+	cout &lt;&lt; (*pf)(a, b) &lt;&lt; endl;
+	cout &lt;&lt; pf(a, b) &lt;&lt; endl;
+}
+//输出
+006D1866
+006D1866
+3
+3
+</code></pre><p>回调函数规避了必须在调用函数前声明的弊端，而且能够让用户直观地感受到自己定义的函数被调用。小A需要在声明函数指针时规定参数列表，小B在定义回调函数时需要与小A声明的函数指针保持相同的参数列表。当然小B可以自己决定在函数体中是否使用这些参数，前提是小A会提前为回调函数形参设置默认值。</p><pre><code class="language-C++">/*test.h*/
+#pragma once
+#include&lt;iostream&gt;
+using namespace std;
+typedef int(*callbackfun)(int, int，int);
+void Add(callbackfun pf, int a=0, int b=0,int c=0)
+{
+	cout &lt;&lt; pf(a, b,c) &lt;&lt; endl;
+}
+/*test.cpp*/
+#include"test.h"
+int add(int a, int b,int c)
+{
+	return a + b;
+}
+void main()
+{
+	Add(add, 1, 2);
+}
+
+</code></pre><h3 id="3有哪些函数可以做回调函数">3、有哪些函数可以做回调函数</h3><p>可以做回调函数的函数在C++中目前我遇到过的有两种，第一种是C语言风格的函数，第二种是静态成员函数。第一种上面已经详细介绍过了，就不再赘述。第二种我在此做详细说明。</p><h5 id="31静态成员函数做回调函数">3.1静态成员函数做回调函数</h5><p>众所周知，类的非静态成员函数的参数列表中隐含了一个this指针，当用类的对象访问类的非静态成员函数时，C++编译器会将this指针指向该对象，从而保证了函数体中操纵的成员变量是该对象的成员变量。即使你没有写上this指针，编译器在编译的时候自动加上this指针。 而在调用回调函数的函数中，它会提供接受回调函数地址的函数指针，该函数指针严格规定了参数列表。由于this指针的存在，非静态成员函数的参数列表和函数指针的参数列表参数个数无法匹配。如下例所示，函数指针callbackfun有两个参数，非静态成员函数隐含this指针从而有三个参数，显然不匹配。</p><pre><code class="language-C++">class AddClass {
+private:
+	int a, b;
+public:
+	int add(int aa, int bb);
+};
+int AddClass::add(int aa, int bb) {
+	a = aa;
+	b = bb;
+	return a + b;
+}
+void Add(int(*callbackfun)(int, int), int a, int b) {
+	cout &lt;&lt; callbackfun(a, b) &lt;&lt; endl;
+}
+void main()
+{
+	Add(AddClass().add, 1, 2);
+}
+
+</code></pre><p>当然如果你执着于使用非静态成员函数，就只能通过普通全局函数做中转，如下例所示。虽然能够实现，但看起来总是傻傻的。</p><pre><code class="language-C++">class AddClass {
+private:
+	int a, b;
+public:
+	int add(int aa, int bb);
+};
+int AddClass::add(int aa, int bb) {
+	a = aa;
+	b = bb;
+	return a + b;
+}
+void Add(int(*callbackfun)(int, int), int a, int b) {
+	cout &lt;&lt; callbackfun(a, b) &lt;&lt; endl;
+}
+int myAdd(int aa, int bb) {
+	AddClass a;
+	return a.add(aa,bb);
+}
+void main()
+{
+	Add(myAdd, 1, 2);
+}
+
+</code></pre><p>类的静态成员函数属于类，为所有对象所共享，它没有this指针，因此这里我们采用静态成员函数作为回调函数。但这里我们又遇到了一个问题，就是静态成员函数是无法访问类的非静态成员的，因此如果用户有访问非静态成员的需求，那么需要在静态成员函数的参数列表中做一点小小的修改。在形参列表中加入万能指针void*作为一个形参，然后在函数体中再进行类型强转。</p><pre><code class="language-C++">/*test.h*/
+#include&lt;iostream&gt;
+using namespace std;
+typedef int(*callbackfun)(int, int, void*);
+void Add(callbackfun pf, int a, int b,void* p) {
+	cout &lt;&lt; pf(a, b,p) &lt;&lt; endl;
+}
+/*test.cpp*/
+#include&lt;test.h&gt;
+class AddClass {
+private:
+	int a, b;
+public:
+	static int add(int aa, int bb,void* temp);
+};
+int AddClass::add(int aa, int bb,void* p) {
+	AddClass* temp = (AddClass*)p;
+	if (temp) {
+		temp-&gt;a = aa;
+		temp-&gt;b = bb;
+	}		
+	return temp-&gt;a + temp-&gt;b;
+}
+void main()
+{
+	AddClass* a = new AddClass;
+	Add(AddClass::add, 1, 2,a);
+}
+
+</code></pre><h3 id="4小结">4、小结</h3><p>①回调函数本质其实是对函数指针的一种应用，上面的例子都比较简单，还没有完全体现回调函数的威力。</p><p>②回调函数是一种设计系统的思想，能够解决系统架构中的部分问题，但是系统中不能过多使用回调函数，因为回调函数会改变整个系统的运行轨迹和执行顺序，耗费资源，而且会使得代码晦涩难懂。</p><p>③C++ STL中有大量使用回调函数的例子。如下例所示，遍历函数for_each()中的lamda表达式就是一个回调函数，当然我们也可以像上面那样定义全局函数或静态成员函数然后将地址传进去。</p><pre><code class="language-C++">#include&lt;iostream&gt;
+#include&lt;vector&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+void main()
+{
+	vector&lt;int&gt; v{ 1,4,6,5,3 };
+	for_each(v.begin(), v.end(), [=](int val) {
+		cout &lt;&lt; val &lt;&lt; " ";
+	});
+}
+
+</code></pre><p>最后，我只是站在应用者的角度提出了我对于回调函数的一点浅显的见解，可能还有许多更高端更系统的观点，如果有能指出我的不足，将不胜感激。</p><p>———————————————— 版权声明：本文为CSDN博主「不想飞的猫」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。 原文链接：https://blog.csdn.net/qq_45311905/article/details/116504377</p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/%E8%AF%AD%E8%A8%80/'>语言</a>, <a href='/categories/c-c/'>C\C++</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/c-c/" class="post-tag no-text-decoration" >C/C++</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=C++回调函数 - Calm's blog&url=http://calm-peng.github.io/posts/C++%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=C++回调函数 - Calm's blog&u=http://calm-peng.github.io/posts/C++%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=C++回调函数 - Calm's blog&url=http://calm-peng.github.io/posts/C++%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/C++%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/">C++回调函数</a><li><a href="/posts/%E5%AE%8F%E5%AE%9A%E4%B9%89-define/">C/C++/中宏特殊字符的含义及用法总结</a><li><a href="/posts/CMake%E7%AC%94%E8%AE%B0/">CMake笔记</a><li><a href="/posts/CMake-%E5%9F%BA%E6%9C%AC%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95-CMakeLists.txt/">CMake基本常用语法CMakeLists.txt</a><li><a href="/posts/C-C++/">C/C++</a></ul></div><div id="access-tags"> <span>Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/c-c/">C/C++</a> <a class="post-tag" href="/tags/cmake/">CMake</a></div></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/C-C++/"><div class="card-body"> <span class="timeago small" > Jul 20, 2021 <i class="unloaded">2021-07-20T16:29:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>C/C++</h3><div class="text-muted small"><p> 1、头文件 对于#include,编译器先从标准库路径开始搜索filename.h，使得系统文件调用比较快； 对于#include"filename.h"，编译器先从用户的工作路径开始搜索filename.h，后去寻找系统路径，使得自定义文件较快。所以在写代码的过程中要根据实际情况选择是&lt;&gt;还是"" 头文件的作用有哪些？头文件的作用主要表现为以下两个方面： (1)通过头文件...</p></div></div></a></div><div class="card"> <a href="/posts/Visual-Studio-%E6%B7%BB%E5%8A%A0%E5%A4%96%E9%83%A8SDK/"><div class="card-body"> <span class="timeago small" > Mar 9, 2022 <i class="unloaded">2022-03-09T10:25:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Visual Studio 添加外部SDK</h3><div class="text-muted small"><p> Visual Studio 添加外部SDK 配置头文件 配置lib目录 （前两步也可统一用以下这步实现） 配置lib名称 配置dll目录 将dll（动态链接库）放入：C:\Windows\System32 禁用过期警告</p></div></div></a></div><div class="card"> <a href="/posts/_tmain()%E5%92%8Cmain()/"><div class="card-body"> <span class="timeago small" > Apr 13, 2022 <i class="unloaded">2022-04-13T15:30:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>_tmain()和main()</h3><div class="text-muted small"><p> 首先，这个_tmain()是为了支持unicode所使用的main一个别名而已。 既然是别名，应该有宏定义过的，在哪里定义的呢？就在那个让你困惑的里，有这么两行： #include #include 我们可以在头文件里找到_tmain的宏定义 #define _tmain main 所以，经过预编译以后， _tmain就变成main了 main()是标准C++的函数入口...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/%E5%AE%8F%E5%AE%9A%E4%B9%89-define/" class="btn btn-outline-primary" prompt="Older"><p>C/C++/中宏特殊字符的含义及用法总结</p></a> <a href="/posts/STL%E5%AE%B9%E5%99%A8/" class="btn btn-outline-primary" prompt="Newer"><p>STL容器</p></a></div></div></div></div><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2023 <a href="https://twitter.com/username">calm-peng</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/tags/c-c/">C/C++</a> <a class="post-tag" href="/tags/cmake/">CMake</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="http://calm-peng.github.io{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script async src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id="></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', ''); }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/lozad/dist/lozad.min.js,npm/magnific-popup@1/dist/jquery.magnific-popup.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script>
